@@ -1,0 +1,31 @@
+services:
+
+  app:
+    container_name: feegow_front
+    build:
+      context: ./front
+      dockerfile: Dockerfile        
+    # command: sh -c "tail -f /dev/null"
+    # tty: true
+    volumes:
+      - './front:/app_dist_host'
+      - '/app/node_modules'
+
+  #NGINX
+  feegowfront_webserver:
+    image: nginx:alpine
+    container_name: feegowfront_webserver
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - app
+    ports:
+      - 8080:8080
+    volumes:
+      - ./front/dist:/var/www/html/dist
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+
+networks:
+  default:
+    # external:
+    name: feegow-network
