@@ -1,12 +1,68 @@
 services:
 
+  api:
+    container_name: feegow_api
+    build:
+      context: ./api
+      dockerfile: Dockerfile 
+    environment:
+      APP_ENV: local
+      APP_DEBUG: true
+      QUEUE_CONNECTION: redis
+      QUEUE_FAILED_DRIVER: log
+      REDIS_PASSWORD: 123456
+      REDIS_CLIENT: predis
+      REDIS_HOST: feegow_redis
+      REDIS_PORT: 6379     
+    depends_on:
+      - db
+      - redis       
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - './api:/var/www/api/'
+
+  db:
+    image: mysql:8
+    container_name: feegow_db
+    restart: unless-stopped
+    tty: true
+    environment:
+      MYSQL_DATABASE: feegow
+      SERVICE_NAME: mysql
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./mysql:/var/lib/mysql     
+    ports:
+      - 3306:3306
+
+  redis:
+    image: redis:alpine
+    container_name: feegow_redis
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 6379:6379
+    environment:
+      - REDIS_PASSWORD=123456
+    command: redis-server --requirepass 123456
+    volumes:
+      - ./redis:/data
+
+  composer:
+    restart: 'no'
+    depends_on:
+      - api
+    image: composer:2
+    command: sh -c "composer install --ignore-platform-reqs && cp .env.example .env && php artisan key:generate"
+    volumes:
+        - ./api:/app
+      
   app:
     container_name: feegow_front
     build:
       context: ./front
-      dockerfile: Dockerfile        
-    # command: sh -c "tail -f /dev/null"
-    # tty: true
+      dockerfile: Dockerfile 
     volumes:
       - './front:/app_dist_host'
       - '/app/node_modules'
@@ -18,11 +74,14 @@ services:
     restart: unless-stopped
     tty: true
     depends_on:
-      - app
+      # - app
+      - api
     ports:
       - 8080:8080
+      - 8181:8181
     volumes:
-      - ./front/dist:/var/www/html/dist
+      - ./front/dist:/var/www/frontend/dist
+      - ./api:/var/www/api/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
 
 networks:
