@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -26,5 +28,25 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {      
+        if ($exception instanceof NotFoundHttpException) {
+            return response()->json([
+                'message' => 'endpoint não encontrado'
+            ], 404);
+        }
+
+        if ($exception instanceof ValidationException) {       
+            return response($exception->errors(), 422);
+            // return $this->error($this->messageErrorDefault, $e->errors());
+        }
+
+        if ($exception instanceof \Exception) {
+            return response('', 400);
+        }
+
+        return parent::render($request, $exception);
     }
 }
