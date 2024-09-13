@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class VaccineCreateRequest extends FormRequest
+class EmployeeCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,9 +30,10 @@ class VaccineCreateRequest extends FormRequest
 
     private function validate() {
         $validator = Validator::make(Request::all(), [          
-            'name' => 'required|min:5|unique:vaccines,name',
-            'batch_number' => 'required|numeric|min:3',
-            'expiration_date' => 'required|date|after:today'            
+            'name' => 'required|string|min:5|max:255',
+            'cpf' => 'required|cpf|unique:employees,cpf',
+            'date_of_birth' => 'required|date',
+            'comorbidities' => 'required|boolean'            
         ]);
 
         return $validator->getRules();

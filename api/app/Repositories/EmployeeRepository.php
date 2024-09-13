@@ -1,10 +1,10 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Vaccine;
+use App\Models\Employee;
 use Illuminate\Database\Eloquent\Model;
 
-class VaccineRepository extends ReferenceRepository
+class EmployeeRepository extends ReferenceRepository
 {
 
     /**
@@ -12,7 +12,7 @@ class VaccineRepository extends ReferenceRepository
      */
     protected $model;
 
-    public function __construct(Vaccine $model)
+    public function __construct(Employee $model)
     {
         $this->model = $model;
     }
