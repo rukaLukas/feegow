@@ -8,8 +8,10 @@ services:
     environment:
       APP_ENV: local
       APP_DEBUG: true
+      CACHE_DRIVER: redis
       QUEUE_CONNECTION: redis
       QUEUE_FAILED_DRIVER: log
+      SESSION_DRIVER: redis
       REDIS_PASSWORD: 123456
       REDIS_CLIENT: predis
       REDIS_HOST: feegow_redis
