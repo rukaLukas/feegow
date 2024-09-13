@@ -1,14 +1,8 @@
 <?php
 
 namespace App\Http\Requests;
-
-use App\Models\Record;
-use App\Models\Vaccine;
-use App\Models\TargetPublic;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
-use App\Models\TypeStatusVaccination;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -35,9 +29,10 @@ class VaccineCreateRequest extends FormRequest
     }
 
     private function validate() {
+        $applyExistsRule = DB::table('vaccines')->count() === 0 ? '' : 'exists:vaccines,name';
         $validator = Validator::make(Request::all(), [          
-            'name' => 'required|min:5|exists:vaccines,name',  
-            'batch_number' => 'required|int|min:3',
+            'name' => 'required|min:5|' . $applyExistsRule,  
+            'batch_number' => 'required|numeric|min:3',
             'expiration_date' => 'required|date|after:today'            
         ]);
 

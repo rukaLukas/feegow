@@ -40,8 +40,8 @@ abstract class ReferenceRepository implements RepositoryInterface
      * @return Model
      */
     public function save(array $params): Model
-    {
-        return $this->getModel()->forceCreate($this->formatParams($params));
+    {      
+        return $this->getModel()->forceCreate($params);
     }
 
     /**
@@ -65,19 +65,6 @@ abstract class ReferenceRepository implements RepositoryInterface
         return $object->first();
     }
 
-    public function where(array $where, $with = []): mixed
-    {
-        return $this->getModel()->where($where)->with($with)->get();
-    }
-
-    public function deleteWhere(array $where) :void
-    {
-        $entities = $this->where($where);
-        foreach ($entities as $entity) {
-            $this->delete($entity->id);
-        }
-    }
-
     /**
      * @param string|int $id
      */
@@ -94,7 +81,7 @@ abstract class ReferenceRepository implements RepositoryInterface
      */
     public function update(Model $entity, array $data): bool
     {
-        return $entity->forceFill($this->formatParams($data))->update();
+        return $entity->forceFill($data)->update();
     }
 
     /**
