@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Model;
 use App\Exceptions\NaoEncontradaException;
 use App\Interfaces\Service\ServiceInterface;
 use App\Exceptions\GeneralValidationException;
@@ -15,8 +13,6 @@ use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Interfaces\Controller\ControllerInterface;
-use Illuminate\Auth\Access\AuthorizationException;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * Class AbstractController

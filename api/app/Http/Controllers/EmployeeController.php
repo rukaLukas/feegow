@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Services\RecordService;
 use App\Services\EmployeeService;
 use App\Http\Resources\EmployeeResource;
 use App\Http\Requests\EmployeeCreateRequest;

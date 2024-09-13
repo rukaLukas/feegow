@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Services\RecordService;
 use App\Services\VaccineService;
 use App\Http\Requests\VaccineCreateRequest;
 

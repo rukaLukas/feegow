@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Vaccination extends Model
-{    
+{
+    protected $table = "vaccination_records";
+
     protected $fillable = [
         'employee_id',
         'vaccine_id',
