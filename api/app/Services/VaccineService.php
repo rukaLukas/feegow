@@ -11,7 +11,7 @@ class VaccineService extends ReferenceService
     protected $repository;
 
     public function __construct(VaccineRepository $repository)
-    {
+    {        
         $this->repository = $repository;
     }
 }

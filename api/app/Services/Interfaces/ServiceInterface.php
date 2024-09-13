@@ -1,10 +1,9 @@
 <?php
+namespace App\Services\Interfaces;
 
-namespace App\Interfaces\Service;
-
-use App\Interfaces\Repository\RepositoryInterface;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+use App\Repositories\Interfaces\RepositoryInterface;
 
 interface ServiceInterface
 {

@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Models\Vaccine;
 use Illuminate\Database\Eloquent\Model;
+use App\Repositories\ReferenceRepository;
 
 class VaccineRepository extends ReferenceRepository
 {
@@ -13,7 +14,7 @@ class VaccineRepository extends ReferenceRepository
     protected $model;
 
     public function __construct(Vaccine $model)
-    {
+    {        
         $this->model = $model;
     }
 }

@@ -2,14 +2,10 @@
 namespace App\Services;
 
 use Illuminate\Http\Request;
-use App\Exceptions\GeneralException;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Database\Eloquent\Model;
-use App\Exceptions\NaoEncontradaException;
-use phpDocumentor\Reflection\Types\Object_;
-use App\Interfaces\Service\ServiceInterface;
-use App\Exceptions\GeneralValidationException;
-use App\Interfaces\Repository\RepositoryInterface;
+use App\Exceptions\EntityNotFoundException;
+use App\Services\Interfaces\ServiceInterface;
+use App\Repositories\Interfaces\RepositoryInterface;
 
 /**
  * Class AbstractService
@@ -77,6 +73,7 @@ abstract class ReferenceService implements ServiceInterface
      * @param Request $request
      * @param string|int $id
      * @return Model
+     * @throws Exception
      */
     public function update(Request $request, string|int $id, $validationName = null): Model
     {
@@ -86,7 +83,7 @@ abstract class ReferenceService implements ServiceInterface
         $data = $this->beforeUpdate($request, $id);
 
         if (null === $this->entity) {
-            throw new NaoEncontradaException($id);
+            throw new EntityNotFoundException($id);
         }
 
         $this->repository->update($this->entity, $data);
@@ -166,7 +163,7 @@ abstract class ReferenceService implements ServiceInterface
     }
 
     public function getPaginationList(array $params)
-    {
+    {                            
         return $this->getRepository()->getPaginationList($params);
     }
 }

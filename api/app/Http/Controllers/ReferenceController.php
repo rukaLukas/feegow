@@ -6,13 +6,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
-use App\Exceptions\NaoEncontradaException;
+use Illuminate\Database\Eloquent\Model;
+use App\Exceptions\EntityNotFoundException;
 use App\Interfaces\Service\ServiceInterface;
 use App\Exceptions\GeneralValidationException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Interfaces\Controller\ControllerInterface;
+use App\Http\Controllers\Interfaces\ControllerInterface;
 
 /**
  * Class AbstractController
@@ -78,16 +79,18 @@ class ReferenceController extends Controller implements ControllerInterface
             $resource = app()->make($this->resource, ['resource' => $paginationList]);            
             return $this->ok($resource::collection($paginationList));           
         }
-
+        dd($paginationList);
         return $this->ok($paginationList);      
     }
 
     /**
-     * Undocumented function
+     * show function
      *
      * @param string|integer $id
      * @return JsonResponse
-     * @throws NaoEncontradaException
+     * @throws EntityNotFoundException
+     * @throws ValidationException
+     * @throws GeneralValidationException
      */
     public function show(string|int $id): JsonResponse
     {
@@ -188,20 +191,20 @@ class ReferenceController extends Controller implements ControllerInterface
         }
     }
 
-    // /**
-    //  * @param string|int $id
-    //  * @return Model
-    //  * @throws NaoEncontradaException
-    //  */
-    // protected function find(string|int $id): Model
-    // {
-    //     $entity = $this->service->find($id);
-    //     if (null === $entity) {
-    //         throw new NaoEncontradaException($id);
-    //     }
+    /**
+     * @param string|int $id
+     * @return Model
+     * @throws EntityNotFoundException
+     */
+    protected function find(string|int $id): Model
+    {
+        $entity = $this->service->find($id);
+        if (null === $entity) {
+            throw new EntityNotFoundException($id);
+        }
 
-    //     return $entity;
-    // }
+        return $entity;
+    }
 
     /**
      * @param Request $request

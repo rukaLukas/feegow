@@ -11,7 +11,7 @@ abstract class ReferenceRepository implements RepositoryInterface
      * @return Model
      */
     public function getModel(): Model
-    {
+    {        
         return $this->model;
     }
 
@@ -104,8 +104,8 @@ abstract class ReferenceRepository implements RepositoryInterface
     {
         $perPage = $params['per_page'] ?? $params['perPage'] ?? $perPage;
         if ($perPage)
-            return $this->getModel()->with($with)->query($params)->paginate($perPage)->withQueryString();
+            return $this->getModel()->with($with)->paginate($perPage)->withQueryString();
 
-        return $this->getModel()->with($with)->query($params)->paginate()->withQueryString();
+        return $this->getModel()->with($with)->paginate()->withQueryString();
     }
 }
