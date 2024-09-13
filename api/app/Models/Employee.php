@@ -20,4 +20,9 @@ class Employee extends Model
         'date_of_birth' => 'date',
         'comorbidities' => 'boolean',
     ];
+
+    public function vaccinations()
+    {
+        return $this->hasMany(Vaccination::class, 'employee_id');
+    }
 }

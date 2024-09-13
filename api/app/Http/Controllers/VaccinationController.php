@@ -8,7 +8,6 @@ use App\Http\Requests\VaccinationCreateRequest;
 class VaccinationController extends ReferenceController
 {
     protected $createRequest = VaccinationCreateRequest::class;
-    protected $resource = VaccinationResource::class;
     
     /**
      * @var RecordService

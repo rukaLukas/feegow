@@ -108,8 +108,7 @@ class Controller extends BaseController
         $data = [
             'type' => 'success',
             'status' => $status,
-            'data' => $formatData,
-            'show' => false
+            'data' => $formatData,          
         ];
 
         return response()->json($data, $status);
