@@ -73,13 +73,14 @@ class ReferenceController extends Controller implements ControllerInterface
      * @return JsonResponse
      */
     public function index(Request $request, ...$params): JsonResponse
-    {      
+    {              
         $paginationList = $this->getPaginationList($request, array_merge($params, $request->all()));               
-        if (isset($this->resource)) {            
-            $resource = app()->make($this->resource, ['resource' => $paginationList]);            
+        if (isset($this->resource)) {                        
+            $resource = app()->make($this->resource, ['resource' => $paginationList]);  
+            // dd($resource);          
             return $this->ok($resource::collection($paginationList));           
         }
-        dd($paginationList);
+      
         return $this->ok($paginationList);      
     }
 

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import EmpregadosView from '../views/EmpregadosView.vue'
+import EmpregadoCreateView from '../views/EmpregadoCreateView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,7 +24,29 @@ const router = createRouter({
         breadcrumb: [
           { title: 'Empregados' }
         ]
-      }
+      },
+      // children: [
+      //   {
+      //     path: 'create', label: 'Cadastrar', name: 'empregados-create', component: EmpregadoCreateView,
+      //     meta: {
+      //       breadcrumb: [
+      //         { text: 'Empregados', href: '/empregados' },
+      //         { title: 'Cadastrar Empregado' }
+      //       ]
+      //     }
+      //   },
+      // ]     
+    },
+    {
+      path: '/empregados/create',
+      name: 'empregados-create',
+      component: EmpregadoCreateView,
+      meta: {
+        breadcrumb: [
+          { text: 'Empregados', href: '/empregados' },
+          { title: 'Cadastrar Empregado' }
+        ]
+      },      
     }
   ]
 })

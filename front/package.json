@@ -11,9 +11,15 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "axios": "^1.7.7",
+    "validations-br": "^1.4.0",
+    "vee-validate": "^4.5.8",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
-    "vuetify": "^3.7.1"
+    "vuetify": "^3.7.1",
+    "yup": "^1.4.0",
+    "yup-locale-pt": "^0.0.9"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",

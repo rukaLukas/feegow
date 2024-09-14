@@ -65,6 +65,8 @@ services:
     build:
       context: ./front
       dockerfile: Dockerfile 
+    environment:
+      VUE_APP_API_BASEURL: http://localhost:8181/api
     volumes:
       - './front:/app_dist_host'
       - '/app/node_modules'

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Employee extends Model
 {
@@ -17,12 +18,17 @@ class Employee extends Model
     ];
 
     protected $casts = [
-        'date_of_birth' => 'date',
+        'date_of_birth' => 'date:Y-m-d',
         'comorbidities' => 'boolean',
     ];
 
     public function vaccinations()
     {
         return $this->hasMany(Vaccination::class, 'employee_id');
+    }
+
+    public function getDateOfBirthAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
     }
 }

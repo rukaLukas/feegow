@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources;
 
-class EmployeeResource
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class EmployeeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,7 +20,7 @@ class EmployeeResource
             'name' => $this->name,
             'cpf' => $this->maskCpf($this->cpf),
             'date_of_birth' => $this->date_of_birth,
-            'comorbidities' => $this->comorbidities        
+            'comorbidities' => $this->comorbidities ? 'Sim' : 'Não'       
         ];
     }
 
