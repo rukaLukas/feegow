@@ -1,85 +1,88 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
+<!-- <script setup>
+import { RouterView } from 'vue-router'
+</script> -->
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-</template>
+    <v-app id="app" ref="el">
+      
+      <!--body-->
+      <v-main class="d-flex align-center justify-center">
+        <v-container fluid>  
+            <v-col 
+              cols="10"
+              offset="2"
+            >
+              <h2>- Feegow - </h2>                              
+            </v-col>   
+            <v-col 
+              id="main-menu"
+              cols="8"
+              offset="2"              
+            >
+              <v-row>
+                <v-col cols="auto">
+                  <v-btn 
+                    density="default"
+                    @click="$router.push({name: 'home'})"
+                  >
+                    Início
+                  </v-btn>
+                </v-col>
+                <v-col cols="auto">
+                  <v-btn 
+                    density="default"
+                    @click="$router.push({name: 'empregados'})"
+                  >
+                    Empregados
+                  </v-btn>
+                </v-col>
+                <v-col cols="auto">
+                  <v-btn density="default">Vacinas</v-btn>
+                </v-col>
+                <v-col cols="auto">
+                  <v-btn density="default">Vacinação</v-btn>
+                </v-col>                
+              </v-row>
+            </v-col> 
+            <v-col 
+              cols="8"
+              offset="2"
+            >                         
+              <v-breadcrumbs 
+                  class="ml-n3 mt-n2" 
+                  v-if="$route.meta && $route.meta.breadcrumb && $route.meta.breadcrumb.length > 1" 
+                  :items="$route.meta.breadcrumb"
+              >
+                  <template v-slot:divider>
+                      <v-icon icon="mdi-chevron-right"></v-icon>
+                  </template>
+              </v-breadcrumbs>
+            </v-col>                  
+            <v-row class="layout" justify="center" align="start" style="min-height: 600px;">             
+              <v-col 
+                cols="10"
+                offset="2"
+                class="pl-4 mt-7"                
+              >                
+                <RouterView />
+              </v-col>                        
+            </v-row>
+        </v-container>
+      </v-main>      
+    </v-app>
+  </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  #app {
+    /* background-color: #E8F6FC; */
+    background-color: #f7f7f7;
+    color: #4A4A4A !important;    
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
+  #main-menu {
+    background-color: #eeeeee;
+    border: 1px solid #b9b8b8;
+    border-radius: 4px;
   }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  .layout {   
+    color: #4A4A4A !important;    
   }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+</style>  
