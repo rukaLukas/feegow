@@ -32,7 +32,7 @@ class EmployeeCreateRequest extends FormRequest
         $validator = Validator::make(Request::all(), [          
             'name' => 'required|string|min:5|max:255',
             'cpf' => 'required|cpf|unique:employees,cpf',
-            'date_of_birth' => 'required|date',
+            'date_of_birth' => 'required|date|before:today',
             'comorbidities' => 'required|boolean'            
         ]);
 
