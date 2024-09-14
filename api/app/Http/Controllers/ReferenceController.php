@@ -220,28 +220,4 @@ class ReferenceController extends Controller implements ControllerInterface
     {
         return $this->service->getList($request->all());
     }
-
-    /**
-     * @param \Exception $e
-     * @return JsonResponse
-     */
-    // protected function handleException(\Exception $e): JsonResponse
-    // {
-    //     if ($e instanceof GeneralException) {            
-    //         Log::info(AuthorizationException::class . " {$e->getMessage()}");           
-    //         return $this->error($this->messageErrorDefault, [$e->getMessage()]);
-    //     }
-    //     if ($e instanceof ValidationException) {
-    //         Log::info(AuthorizationException::class . " {$e->getMessage()}");
-    //         return $this->error($this->messageErrorDefault, $e->errors());
-    //     }
-    //     if ($e instanceof AuthorizationException) {
-    //         Log::info(AuthorizationException::class . " {$e->getMessage()}");
-    //         return $this->error($this->messageErrorDefault, ["Usuário sem permissão de acesso"], Response::HTTP_FORBIDDEN);
-    //     }
-    //     if ($e instanceof \Exception) {
-    //         Log::error(\Exception::class . " {$e->getMessage()}");
-    //         return $this->error($this->messageErrorDefault, [$e->getMessage()]);
-    //     }
-    // }
 }

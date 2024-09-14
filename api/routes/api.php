@@ -16,4 +16,8 @@ Route::apiResource('/employees', EmployeeController::class);
 
 Route::apiResource('/vaccinations', VaccinationController::class);
 
-Route::get('/reports/unvaccinatedEmployees', [ReportController::class, 'unvaccinatedEmployees']);
+
+Route::group(['prefix' => '/reports'], function () {
+    Route::get('unvaccinatedEmployees', [ReportController::class, 'unvaccinatedEmployees']);
+    Route::get('checkStatus', [ReportController::class, 'checkStatus']);
+});

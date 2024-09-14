@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Jobs\VaccinationReport;
 use App\Services\ReportService;
+use Illuminate\Support\Facades\Cache;
 
 class ReportController extends ReferenceController
 {    
@@ -10,6 +12,7 @@ class ReportController extends ReferenceController
      */
     protected $service;
 
+    protected $pollingTimeout = 60;
 
     public function __construct(ReportService $service)
     {        
@@ -19,8 +22,23 @@ class ReportController extends ReferenceController
 
     public function unvaccinatedEmployees()
     {
-        $employees = $this->service->unvaccinatedEmployees();
+         VaccinationReport::dispatch();
 
-        return $this->ok($employees);
+         return response()->json(['data' => 'Relatório sendo gerado.']);        
+    }
+
+    public function checkStatus()
+    {
+        $report = Cache::get('unvaccinated_report');
+
+        if ($report && $report['status'] === 'completed') {
+            return response()->json([
+                'status' => 'completed',
+                'filename' => $report['filename'],
+                'download_link' => url('storage/' . $report['filename'])
+            ]);
+        }
+        
+        return response()->json(['status' => 'Relatório sendo gerado']);
     }
 }
