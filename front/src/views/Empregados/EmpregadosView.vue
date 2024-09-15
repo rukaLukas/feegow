@@ -1,6 +1,5 @@
 <script setup>
-import {reactive, ref, watch, onBeforeMount} from 'vue';
-import {defineEmits} from 'vue'
+import {ref} from 'vue';
 import Employee from '@/api/Employee';
 
 import List from '@/components/List.vue';

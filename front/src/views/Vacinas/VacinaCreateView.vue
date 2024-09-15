@@ -1,11 +1,8 @@
 <script setup>
-import {reactive, ref, watch, onBeforeMount} from 'vue';
-import {defineEmits} from 'vue'
+import {ref} from 'vue';
 import {Field, Form} from 'vee-validate';
 import router from "@/router/index";
 import Vaccine from '@/api/Vaccine';
-import * as stringHelpers from '@/helpers/string';
-import * as dateHelpers from '@/helpers/date';
 import * as yup from "yup";
 
 const name = ref('');

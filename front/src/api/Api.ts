@@ -117,6 +117,11 @@ export default class Api {
     });      
   }; 
 
+
+  async get(uri: string) {  
+    return await axios.get(`${this.url}${uri}`);
+  }
+
   async success(success: any) {
     return {
       ok: true,

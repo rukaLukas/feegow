@@ -11,7 +11,7 @@ import { RouterView } from 'vue-router'
               cols="10"
               offset="2"
             >
-              <h2>- Feegow - </h2>                              
+              <h2>- Feegow -</h2>                              
             </v-col>   
             <v-col 
               id="main-menu"
@@ -42,10 +42,20 @@ import { RouterView } from 'vue-router'
                   >Vacinas</v-btn>
                 </v-col>
                 <v-col cols="auto">
-                  <v-btn density="default">Vacinação</v-btn>
+                  <v-btn 
+                    density="default"
+                    @click="$router.push({name: 'vacinacao'})"
+                  >
+                    Vacinação
+                  </v-btn>
                 </v-col>
                 <v-col cols="auto">
-                  <v-btn density="default">Relatório de Não Vacinados</v-btn>
+                  <v-btn 
+                    density="default"
+                    @click="$router.push({name: 'relatorios'})"
+                  >
+                    Relatório de Não Vacinados
+                  </v-btn>
                 </v-col>                
               </v-row>
             </v-col> 
@@ -79,7 +89,6 @@ import { RouterView } from 'vue-router'
 
 <style scoped>
   #app {
-    /* background-color: #E8F6FC; */
     background-color: #f7f7f7;
     color: #4A4A4A !important;    
   }

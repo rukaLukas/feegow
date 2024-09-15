@@ -1,11 +1,9 @@
 <script setup>
-import {reactive, ref, watch, onBeforeMount} from 'vue';
-import {defineEmits} from 'vue'
+import {ref} from 'vue';
 import {Field, Form} from 'vee-validate';
 import router from "@/router/index";
 import Employee from '@/api/Employee';
 import * as stringHelpers from '@/helpers/string';
-import * as dateHelpers from '@/helpers/date';
 import {validateCPF} from 'validations-br';
 import * as yup from "yup";
 
@@ -36,8 +34,7 @@ const onSubmit = async () => {
       name: name.value,
       cpf: stringHelpers.removeMask(cpf.value),
       date_of_birth: stringHelpers.removeMask(date_of_birth.value),
-      comorbidities: comorbidities.value
-    //   birthdate: dateBirth.value,      
+      comorbidities: comorbidities.value     
     };
 
     submitForm(formData);

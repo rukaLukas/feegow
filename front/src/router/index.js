@@ -6,6 +6,8 @@ import EmpregadoCreateView from '../views/Empregados/EmpregadoCreateView.vue'
 import VacinasView from '../views/Vacinas/VacinasView.vue'
 import VacinaCreateView from '../views/Vacinas/VacinaCreateView.vue'
 
+import RelatorioView from '../views/RelatorioView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -40,7 +42,7 @@ const router = createRouter({
         ]
       },      
     },
-    
+
     // Vacinas
     {
       path: '/vacinas',
@@ -62,7 +64,19 @@ const router = createRouter({
           { title: 'Cadastrar Vacina' }
         ]
       },      
-    }
+    },
+
+    // Report
+    {
+      path: '/relatorios',
+      name: 'relatorios',
+      component: RelatorioView,
+      meta: {
+        breadcrumb: [
+          { title: 'Relatórios' }
+        ]
+      },
+    },
   ]
 })
 
