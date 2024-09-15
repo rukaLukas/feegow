@@ -2,7 +2,6 @@
     <v-row class="mt-1">
       <v-col cols="10" class="text-left">
         <h2>Exibindo {{ total }} {{ label }} criados</h2>
-        <slot name="headerDescription"></slot>
       </v-col>
     </v-row>
     <v-row class="">

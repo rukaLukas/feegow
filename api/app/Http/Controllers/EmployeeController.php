@@ -11,7 +11,7 @@ class EmployeeController extends ReferenceController
     protected $resource = EmployeeResource::class;
     
     /**
-     * @var RecordService
+     * @var EmployeeService
      */
     protected $service;
 

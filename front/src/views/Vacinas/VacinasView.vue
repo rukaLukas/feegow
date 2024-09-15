@@ -1,16 +1,14 @@
 <script setup>
-import {reactive, ref, watch, onBeforeMount} from 'vue';
-import {defineEmits} from 'vue'
-import Employee from '@/api/Employee';
+import {ref} from 'vue';
+import Vacina from '@/api/Vaccine';
 
-import List from '../components/List.vue';
+import List from '@/components/List.vue';
 
 const fields = ref([
   {"field": "id", "alias": "id"},
   {"field": "name", "alias": "nome"},
-  {"field": "cpf", "alias": "cpf"},
-  {"field": "date_of_birth", "alias": "data de nascimento"},
-  {"field": "comorbidities", "alias": "comorbidades"},
+  {"field": "batch_number", "alias": "lote"},
+  {"field": "expiration_date", "alias": "data de expiração"},
 ]);
 </script>
 
@@ -24,18 +22,17 @@ const fields = ref([
         <v-col cols="10">
             <v-btn 
                 density="default"
-                @click="$router.push({name: 'empregados-create'})"
+                @click="$router.push({name: 'vacinas-create'})"
             >
-                Cadastrar Empregado
+                Cadastrar Vacina
             </v-btn>
         </v-col>
     </v-row>  
     <List
         :fields="fields"
-        :api="Employee"
-        :label="'Empregados'"
-        :route="'employees'"
-        style="z-index: -1"        
+        :api="Vacina"
+        :label="'Vacinas'"
+        :route="'vaccines'"       
     >
     </List>
 </template>

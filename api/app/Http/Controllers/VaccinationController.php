@@ -10,7 +10,7 @@ class VaccinationController extends ReferenceController
     protected $createRequest = VaccinationCreateRequest::class;
     
     /**
-     * @var RecordService
+     * @var VaccinationService
      */
     protected $service;
 

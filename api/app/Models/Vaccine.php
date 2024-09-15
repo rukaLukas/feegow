@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Vaccine extends Model
@@ -15,4 +16,9 @@ class Vaccine extends Model
     protected $casts = [
         'expiration_date' => 'date',
     ];
+
+    public function getExpirationDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
+    }
 }

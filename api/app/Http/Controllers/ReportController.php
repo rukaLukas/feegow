@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 class ReportController extends ReferenceController
 {    
     /**
-     * @var RecordService
+     * @var ReportService
      */
     protected $service;
 

@@ -36,10 +36,16 @@ import { RouterView } from 'vue-router'
                   </v-btn>
                 </v-col>
                 <v-col cols="auto">
-                  <v-btn density="default">Vacinas</v-btn>
+                  <v-btn 
+                    density="default"
+                    @click="$router.push({name: 'vacinas'})"
+                  >Vacinas</v-btn>
                 </v-col>
                 <v-col cols="auto">
                   <v-btn density="default">Vacinação</v-btn>
+                </v-col>
+                <v-col cols="auto">
+                  <v-btn density="default">Relatório de Não Vacinados</v-btn>
                 </v-col>                
               </v-row>
             </v-col> 
