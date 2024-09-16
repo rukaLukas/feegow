@@ -12,8 +12,7 @@ class Vaccine extends Api {
       let vaccines = data.data.data;
   
       vaccines.forEach((value, key) => {
-        let ndata = dateHelpers.FormatStringDatePTBR(value.expiration_date)
-        value.expiration_date = ndata;
+        value.expiration_date = dateHelpers.FormatStringDatePTBR(value.expiration_date) //ndata;
       })
 
       return data;

@@ -23,7 +23,7 @@ const fields = ref([
         <v-col cols="10">
             <v-btn 
                 density="default"
-                @click="$router.push({name: 'vacinas-create'})"
+                @click="$router.push({name: 'vacinacao-create'})"
             >
                 Cadastrar Vacinação
             </v-btn>

@@ -26,16 +26,24 @@ class VaccinationCreateRequest extends FormRequest
     {
         return $this->validate();
     }
-
+    
     private function validate() {
         $validator = Validator::make(Request::all(), [          
-            'employee_id' => 'required|int|exists:employees,id',
-            'vaccine_id' => 'required|int|exists:vaccines,id',
-            'first_dose_date' => 'nullable|date',
-            'second_dose_date' => 'nullable|date',
-            'third_dose_date' => 'nullable|date',                        
+            'employee_id' => 'required|integer|exists:employees,id',
+            'vaccine_id' => 'required|integer|exists:vaccines,id',
+            'first_dose_date' => 'required|date',
+            'second_dose_date' => 'nullable|date|after:first_dose_date',
+            'third_dose_date' => 'nullable|date|after:second_dose_date',
         ]);
 
         return $validator->getRules();
+    }
+
+    public function messages()
+    {
+        return [         
+            'second_dose_date.after' => 'A data da segunda dose deve ser após a data da primeira dose.',
+            'third_dose_date.after' => 'A data da terceira dose deve ser após a data da segunda dose.',
+        ];
     }
 }
