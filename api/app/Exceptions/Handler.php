@@ -44,7 +44,6 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof \Exception) {
-            dd($exception->getMessage());
             return response('', 500);
         }
 

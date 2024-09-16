@@ -181,7 +181,7 @@ class ReferenceController extends Controller implements ControllerInterface
             $this->find($id);            
             $this->service->delete($id);
 
-            return $this->success();
+            return $this->success(null, null, 204);
         } catch (GeneralException $e) {
             if ($e instanceof GeneralException) {
                 return $this->error($this->messageErrorDefault, $e->getErrors());
