@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+
 import EmpregadosView from '../views/Empregados/EmpregadosView.vue'
-import EmpregadoCreateView from '../views/Empregados/EmpregadoCreateView.vue'
+import EmpregadoCreateView from '../views/Empregados/New.vue'
+import EmpregadoEditView from '../views/Empregados/Edit.vue'
 
 import VacinasView from '../views/Vacinas/VacinasView.vue'
 import VacinaCreateView from '../views/Vacinas/New.vue'
@@ -25,6 +27,8 @@ const router = createRouter({
         ]
       }
     },
+
+    // Empregados
     {
       path: '/empregados',
       name: 'empregados',
@@ -45,6 +49,17 @@ const router = createRouter({
           { title: 'Cadastrar Empregado' }
         ]
       },      
+    },
+    {
+      path: '/empregados/edit/:id', 
+      name: 'empregados-edit', 
+      component: EmpregadoEditView,
+      meta: {
+        breadcrumb: [
+          { text: 'Colaboradores', href: '/empregados' },
+          { title: 'Editar Colaborador' }
+        ]
+      },
     },
 
     // Vacinas

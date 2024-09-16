@@ -33,7 +33,7 @@ const fields = ref([
         :fields="fields"
         :api="Employee"
         :label="'Empregados'"
-        :route="'employees'"
+        :route="'empregados'"
         style="z-index: -1"        
     >
     </List>

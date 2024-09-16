@@ -1,11 +1,15 @@
 <script setup>
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
 import {Field, Form} from 'vee-validate';
-import router from "@/router/index";
 import Employee from '@/api/Employee';
 import * as stringHelpers from '@/helpers/string';
 import {validateCPF} from 'validations-br';
 import * as yup from "yup";
+import {useRoute} from "vue-router";
+
+const emit = defineEmits();
+const id = ref(null);
+const route = useRoute()
 
 const name = ref('');
 const cpf = ref('');
@@ -28,6 +32,22 @@ shape["date_of_birth"] = yup
 
 let schema = yup.object().shape(shape, [['cpf']]);
 
+onMounted(async () => {
+  id.value = route.params.id ? route.params.id : null;
+  if (id.value) {
+    await find();
+  }
+})
+
+
+const find = async () => {
+    const {data} = await Employee.find(id.value);
+    name.value = data.name
+    cpf.value = data.cpf
+    date_of_birth.value = data.date_of_birth,
+    comorbidities.value = data.comorbidities == 0 ? false : true
+};
+
 const onSubmit = async () => {
    
     const formData = {
@@ -41,11 +61,15 @@ const onSubmit = async () => {
 }
 
 const submitForm = async (formData) => {
-  try {
-    let retData; 
-    retData = await Employee.save(formData);    
+    try {
+    let retData;
+    if (id.value) {
+      retData = await Employee.update(id.value, formData);
+    } else {
+        retData = await Employee.save(formData);
+    }            
     if (retData.ok) {
-      return router.push({name: "empregados"});
+        emit('handle-success');
     }
   } catch (e) {
     console.log(e);
@@ -90,7 +114,7 @@ const submitForm = async (formData) => {
                   </Field>
             </v-col> 
             <v-col cols="3">
-                <Field name="date_of_birth" v-slot="{ field, errors }">
+                <Field name="date_of_birth" v-model="date_of_birth" v-slot="{ field, errors }">
                     <v-text-field
                       name="date_of_birth"
                       v-bind="field"

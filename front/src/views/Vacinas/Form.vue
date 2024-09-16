@@ -1,10 +1,8 @@
 
 <script setup>
-import {onMounted, reactive, ref} from 'vue';
+import {onMounted, ref} from 'vue';
 import {Field, Form} from 'vee-validate';
-import router from "@/router/index";
 import Vaccine from '@/api/Vaccine';
-import Api from '@/api/Vaccine';
 import * as yup from "yup";
 import {useRoute} from "vue-router";
 
@@ -36,27 +34,11 @@ shape["expiration_date"] = yup
 
 let schema = yup.object().shape(shape, [['cpf']]);
 
-// const form = reactive({
-//     name: '',    
-//     batch_number: '',
-//     expiration_date: ''
-// });
-
 const find = async () => {
-    const {data} = await Api.find(id.value);
+    const {data} = await Vaccine.find(id.value);
     name.value = data.name
     batch_number.value = data.batch_number
     expiration_date.value = data.expiration_date
-
-    console.log(expiration_date.value);
-
-//   vaccine.value = data;
-//   Object.assign(form, {
-//     id: data.id,
-//     name: data.name,    
-//     batch_number: data.batch_number,
-//     expiration_date: data.expiration_date
-//   })
 };
 
 onMounted(async () => {
