@@ -126,7 +126,23 @@
     let length = ref(0);
     const slots = useSlots()
   
-    const getDescriptionName = (item, field) => {   
+    const getDescriptionName = (item, field) => { 
+      // percorre valores de atributos que são objetos 
+      if (field.field.includes('.')) {
+        const arr = field.field.split('.');
+
+        if (arr.length == 2) {
+          const initial = item[arr[0]];
+          return initial[arr[1]]
+        }
+
+        if (arr.length == 3) {
+          const first = item[arr[0]];
+          const second = first[arr[1]];
+          return second[arr[2]]
+        }
+      }
+    
       return item[field.field]
     }
   
