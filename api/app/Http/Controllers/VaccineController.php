@@ -5,11 +5,13 @@ use Illuminate\Http\Request;
 use App\Services\VaccineService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Resources\VaccineResource;
 use App\Http\Requests\VaccineCreateRequest;
 
 class VaccineController extends ReferenceController
 {
-    protected $createRequest = VaccineCreateRequest::class;    
+    protected $createRequest = VaccineCreateRequest::class; 
+    protected $resource = VaccineResource::class;   
 
     /**
      * @var VaccineService

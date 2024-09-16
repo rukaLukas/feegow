@@ -32,7 +32,7 @@ const fields = ref([
         :fields="fields"
         :api="Vacina"
         :label="'Vacinas'"
-        :route="'vaccines'"       
+        :route="'vacinas'"       
     >
     </List>
 </template>

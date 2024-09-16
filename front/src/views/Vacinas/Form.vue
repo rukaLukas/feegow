@@ -1,10 +1,18 @@
+
 <script setup>
-import {ref} from 'vue';
+import {onMounted, reactive, ref} from 'vue';
 import {Field, Form} from 'vee-validate';
 import router from "@/router/index";
 import Vaccine from '@/api/Vaccine';
+import Api from '@/api/Vaccine';
 import * as yup from "yup";
+import {useRoute} from "vue-router";
 
+const emit = defineEmits();
+
+const route = useRoute()
+
+const id = ref(null);
 const name = ref('');
 const batch_number = ref('');
 const expiration_date = ref('');
@@ -28,6 +36,36 @@ shape["expiration_date"] = yup
 
 let schema = yup.object().shape(shape, [['cpf']]);
 
+// const form = reactive({
+//     name: '',    
+//     batch_number: '',
+//     expiration_date: ''
+// });
+
+const find = async () => {
+    const {data} = await Api.find(id.value);
+    name.value = data.name
+    batch_number.value = data.batch_number
+    expiration_date.value = data.expiration_date
+
+    console.log(expiration_date.value);
+
+//   vaccine.value = data;
+//   Object.assign(form, {
+//     id: data.id,
+//     name: data.name,    
+//     batch_number: data.batch_number,
+//     expiration_date: data.expiration_date
+//   })
+};
+
+onMounted(async () => {
+  id.value = route.params.id ? route.params.id : null;
+  if (id.value) {
+    await find();
+  }
+})
+
 const onSubmit = async () => {
    
     const formData = {
@@ -40,11 +78,16 @@ const onSubmit = async () => {
 }
 
 const submitForm = async (formData) => {
+
   try {
-    let retData; 
-    retData = await Vaccine.save(formData);    
+    let retData;
+    if (id.value) {
+      retData = await Vaccine.update(id.value, formData);
+    } else {
+        retData = await Vaccine.save(formData);
+    }            
     if (retData.ok) {
-      return router.push({name: "vacinas"});
+        emit('handle-success');
     }
   } catch (e) {
     console.log(e);
@@ -89,7 +132,7 @@ const submitForm = async (formData) => {
                   </Field>
             </v-col> 
             <v-col cols="3">
-                <Field name="expiration_date" v-slot="{ field, errors }">
+                <Field name="expiration_date" v-model="expiration_date" v-slot="{ field, errors }">
                     <v-text-field
                       name="expiration_date"
                       v-bind="field"

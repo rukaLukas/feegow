@@ -4,7 +4,8 @@ import EmpregadosView from '../views/Empregados/EmpregadosView.vue'
 import EmpregadoCreateView from '../views/Empregados/EmpregadoCreateView.vue'
 
 import VacinasView from '../views/Vacinas/VacinasView.vue'
-import VacinaCreateView from '../views/Vacinas/VacinaCreateView.vue'
+import VacinaCreateView from '../views/Vacinas/New.vue'
+import VacinaEditView from '../views/Vacinas/Edit.vue'
 
 import VacinacaoView from '../views/Vacinacao/VacinacaoView.vue'
 import VacinacaoCreateView from '../views/Vacinacao/VacinacaoCreateView.vue'
@@ -67,6 +68,17 @@ const router = createRouter({
           { title: 'Cadastrar Vacina' }
         ]
       },      
+    },
+    {
+      path: '/vacinas/edit/:id', 
+      name: 'vacinas-edit', 
+      component: VacinaEditView,
+      meta: {
+        breadcrumb: [
+          { text: 'Vacinas', href: '/vacinas' },
+          { title: 'Editar Vacina' }
+        ]
+      },
     },
 
      // Vacinacao

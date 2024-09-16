@@ -48,6 +48,8 @@ abstract class ReferenceService implements ServiceInterface
     {
         $this->beforeDelete($id);
         $this->repository->delete($id);
+        $this->afterDelete($id);
+
     }
 
     /**
@@ -141,6 +143,15 @@ abstract class ReferenceService implements ServiceInterface
      * @param mixed $model
      */
     public function afterUpdate(Request $request, mixed $model): void
+    {
+
+    }
+
+    /**
+     * @param string|integer $id
+     * @return void
+     */
+    public function afterDelete(string|int $id): void
     {
 
     }

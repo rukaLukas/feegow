@@ -21,4 +21,14 @@ class VaccineService extends ReferenceService
     {
         Cache::forget('vaccines');
     }
+
+    public function afterUpdate(Request $request, mixed $model): void        
+    {
+        Cache::forget('vaccines');
+    }
+
+    public function afterDelete(string|int $id): void
+    {
+        Cache::forget('vaccines');
+    }
 }

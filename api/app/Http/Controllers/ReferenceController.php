@@ -73,7 +73,7 @@ class ReferenceController extends Controller implements ControllerInterface
      * @return JsonResponse
      */
     public function index(Request $request, ...$params): JsonResponse
-    {              
+    {                      
         $paginationList = $this->getPaginationList($request, array_merge($params, $request->all()));               
         if (isset($this->resource)) {                        
             $resource = app()->make($this->resource, ['resource' => $paginationList]);  
@@ -94,7 +94,7 @@ class ReferenceController extends Controller implements ControllerInterface
      * @throws GeneralValidationException
      */
     public function show(string|int $id): JsonResponse
-    {
+    {        
         try {
             $entity = $this->find($id);                        
             return $this->ok(new $this->resource($entity));

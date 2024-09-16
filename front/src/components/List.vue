@@ -41,9 +41,9 @@
                 </div>
               </td>
               <td style="color: #9c9c9c" v-if="!slots['custombuttonActions']">                
-                <!-- <router-link :to="`/${route}/edit/${item.id}`" class="">
+                <router-link :to="`/${route}/edit/${item.id}`" class="">
                   <v-icon alt="EDITAR" title="EDITAR" size="default" icon="mdi-pencil"/>
-                </router-link> -->                          
+                </router-link>                          
                 <v-icon class="pl-5" title="Deletar" alt="Deletar" size="default"
                         @click="deleteItem(item.id)" icon="mdi-delete"/>
               </td>                          
