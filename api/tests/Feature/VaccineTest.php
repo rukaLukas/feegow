@@ -87,4 +87,37 @@ class VaccineTest extends TestCase
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['name']);
     }
+
+    public function test_can_list_vaccines_with_cache()
+    {
+        $store = Cache::store();
+
+        Cache::shouldReceive('store')->andReturn($store);
+        
+        // Arrange: Mock the cache response
+        Cache::shouldReceive('remember')
+            ->once()
+            ->with('vaccines', \Mockery::type('DateTime'), \Mockery::type('Closure'))
+            ->andReturn([
+                'data' => [
+                    [
+                        'id' => 1,
+                        'name' => 'Test Vaccine',
+                        'batch_number' => '123',
+                        'expiration_date' => '2024-12-31',
+                    ]
+                ]
+            ]);
+
+        // Act: Make the request
+        $response = $this->getJson('/api/vaccines');
+       
+        // Assert: Check response
+        $response->assertStatus(200)
+            // ->assertJsonPath('data.data.id', 1)
+            ->assertJsonPath('data.data.0.id', 1)
+            ->assertJsonPath('data.data.0.name', 'Test Vaccine')
+            ->assertJsonPath('data.data.0.batch_number', '123')
+            ->assertJsonPath('data.data.0.expiration_date', '2024-12-31');
+    }
 }
