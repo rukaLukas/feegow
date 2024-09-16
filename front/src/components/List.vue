@@ -54,7 +54,7 @@
         <br/>
       </v-col>
     </v-row>
-    <!-- <Paginator :length="length" :page="page" @page-changed="getAll($event)"/> -->
+    <Paginator :length="length" :page="page" @page-changed="getAll($event)"/>
 
 
 
@@ -85,8 +85,8 @@
     </v-dialog>
   </template>
   <script lang="ts" setup>
-  import {onMounted, PropType, ref, useSlots, defineExpose, watch} from 'vue';
-    // import Paginator from './Paginator.vue';
+    import {onMounted, PropType, ref, useSlots, defineExpose, watch} from 'vue';
+    import Paginator from './Paginator.vue';
     import {ListInterface} from '../interfaces/listInterface'
     
     const props = defineProps({
@@ -152,19 +152,13 @@
         showConfirmDialog.value = true   
     }
   
-    const getAll = async (searchF = "") => {
-    //   const paramsRoute = new URLSearchParams(props.customSearch);
-    //   const paramType = paramsRoute.get("type");
-  
-    //   if (paramType != null) searchF['type'] = paramType;
-    //   page.value = searchF['page'] || props?.search?.page
-    //   let pageValue = page.value
-    //   const getAllsearch = {
-    //     ...props.search,
-    //     page: pageValue,
-    //     ...Object.fromEntries(paramsRoute.entries())
-    //   }
-      const {data} = await props.api.getAll();
+    const getAll = async (searchF = "") => {    
+      page.value = searchF['page']
+      let pageValue = page.value
+      const getAllsearch = {        
+        page: pageValue
+      }
+      const {data} = await props.api.getAll(getAllsearch);
       buildResults(data);
     }    
   
